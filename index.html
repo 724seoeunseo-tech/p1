@@ -1,14 +1,132 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
+  <title>커뮤니티</title>
   <link href='/style.css' rel='stylesheet'>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="logo">Community</a>
+      <nav class="nav">
+        <a href="#" class="nav-link active">전체</a>
+        <a href="#" class="nav-link">인기</a>
+        <a href="#" class="nav-link">질문</a>
+        <a href="#" class="nav-link">자유</a>
+      </nav>
+      <div class="header-actions">
+        <button class="btn btn-primary" id="writeBtn">글쓰기</button>
+        <button class="btn btn-ghost" id="loginBtn">로그인</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="card">
+        <h3 class="card-title">카테고리</h3>
+        <ul class="category-list">
+          <li><a href="#" class="category-item active" data-category="all">전체 <span class="badge">128</span></a></li>
+          <li><a href="#" class="category-item" data-category="free">자유게시판 <span class="badge">45</span></a></li>
+          <li><a href="#" class="category-item" data-category="question">질문답변 <span class="badge">32</span></a></li>
+          <li><a href="#" class="category-item" data-category="info">정보공유 <span class="badge">28</span></a></li>
+          <li><a href="#" class="category-item" data-category="review">후기 <span class="badge">23</span></a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="card-title">인기 태그</h3>
+        <div class="tag-cloud">
+          <span class="tag">#일상</span>
+          <span class="tag">#개발</span>
+          <span class="tag">#취미</span>
+          <span class="tag">#여행</span>
+          <span class="tag">#맛집</span>
+          <span class="tag">#음악</span>
+          <span class="tag">#영화</span>
+          <span class="tag">#게임</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Post List -->
+    <section class="content">
+      <!-- Search -->
+      <div class="search-bar">
+        <input type="text" class="search-input" id="searchInput" placeholder="검색어를 입력하세요..." />
+        <button class="btn btn-primary" id="searchBtn">검색</button>
+      </div>
+
+      <!-- Sort -->
+      <div class="sort-bar">
+        <button class="sort-btn active" data-sort="latest">최신순</button>
+        <button class="sort-btn" data-sort="popular">인기순</button>
+        <button class="sort-btn" data-sort="comments">댓글순</button>
+      </div>
+
+      <!-- Posts -->
+      <div class="post-list" id="postList"></div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination"></div>
+    </section>
+  </main>
+
+  <!-- Write Modal -->
+  <div class="modal-overlay" id="writeModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>새 글 작성</h2>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <select class="form-select" id="postCategory">
+          <option value="free">자유게시판</option>
+          <option value="question">질문답변</option>
+          <option value="info">정보공유</option>
+          <option value="review">후기</option>
+        </select>
+        <input type="text" class="form-input" id="postTitle" placeholder="제목을 입력하세요" />
+        <textarea class="form-textarea" id="postContent" placeholder="내용을 입력하세요..." rows="10"></textarea>
+        <input type="text" class="form-input" id="postTags" placeholder="태그 (쉼표로 구분)" />
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelBtn">취소</button>
+        <button class="btn btn-primary" id="submitBtn">등록</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post Detail Modal -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2 id="detailTitle"></h2>
+        <button class="modal-close" id="detailClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-meta" id="detailMeta"></div>
+        <div class="detail-content" id="detailContent"></div>
+        <div class="detail-tags" id="detailTags"></div>
+        <div class="detail-actions">
+          <button class="action-btn" id="likeBtn">&#9829; <span id="likeCount">0</span></button>
+        </div>
+        <div class="comment-section">
+          <h3>댓글</h3>
+          <div class="comment-list" id="commentList"></div>
+          <div class="comment-form">
+            <textarea class="form-textarea" id="commentInput" placeholder="댓글을 입력하세요..." rows="3"></textarea>
+            <button class="btn btn-primary" id="commentBtn">댓글 등록</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script defer type="text/javascript" src="/main.js"></script>
 </body>
 </html>
